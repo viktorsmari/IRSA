@@ -1,11 +1,37 @@
 from bottle import route, run, template, get, post, request, static_file
 
 
-# Index 
+#### Basic routes ####
+
 @route('/')
 def index():
 	return template('index.tpl')
 
+@route('/create')
+def createpage():
+	return template('create.tpl')
+
+@route('/overview')	
+def overviewpage():
+	return template('overview.tpl')
+
+@route('/clients')
+def clientspage():
+	return template('clients.tpl')
+
+@route('/users')
+def userspage():
+	return template('users.tpl')
+
+@route('/settings')
+def settingspage():
+	return template('settings.tpl')
+
+
+
+
+
+#### test ####
 
 @route('/hello/<name>')
 def hello(name='Stranger'):
@@ -26,18 +52,22 @@ def callback(id):
 def callback(name):
 	assert name.isalpha()
 
+
+
+
+
+
+#### Serving CSS and JS files #####
 @route('/static/<filename>')
 def server_staticf(filename):
 	return static_file(filename, root='static')
 
-
-# Errors
+#### Errors ####
 from bottle import error 
 @error(404)
 def error404(error):
-	return 'Some 404 error'
+	return '<p>You gotz 404 error</p> <a href="/">Go Back</a>'
 
 
-# Final line
-
+# Reloader only in developer mode !
 run(host='localhost', port=8080, debug=True, reloader=True)
