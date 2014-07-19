@@ -39,7 +39,7 @@
 
 		<!-- Menu -->
 		<div class="row">
-			<div class="btn-group btn-group-lg">
+			<div class="btn-group btn-group-justified btn-group-lg">
 				<a href="create" class="btn btn-default">Create</a>
 				<a href="overview" class="btn btn-default">Overview</a>
 				<a href="clients" class="btn btn-default">Clients</a>
