@@ -48,15 +48,8 @@
 			</div>
 		</div> <!-- End row menu -->
 
-		<!--  Here is the action -->
 
+		<!--  Should we INJECT stuff here? -->
+		<!-- Instead of importing this file into every other files -->
 
-
-		<!-- Stop here -->
-	</div>
-
-
-
-
-</body>
-</html>
+	<!-- Rest is in footer.tpl -->
