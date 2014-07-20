@@ -8,8 +8,9 @@ Ubuntu install:
 
     git clone https://github.com/viktorsmari/verk2
  
- apt-get install sqlite3 python-pip
+You need sqlite3 for the database and python-pip to install bottle
 
+    apt-get install sqlite3 python-pip
     sudo pip install bottle
  
 
