@@ -1,4 +1,4 @@
-from bottle import route, run, template, get, post, request, static_file
+from bottle import route, run, template, get, post, request, static_file, redirect
 import sqlite3
 
 
@@ -8,8 +8,31 @@ import sqlite3
 def index():
 	return template('index.tpl')
 
-@route('/create')
+@route('/new', method='GET')
+def create_new():
+	if request.GET.get('save','').strip():
+		conn = sqlite3.connect('database.db')
+		c = conn.cursor()
+
+		# This needs refactoring, SQL inject safe?
+		ssn = request.GET.get('ssn','').strip()
+		name = request.GET.get('name','').strip()
+		email = request.GET.get('email','').strip()
+		phone = request.GET.get('phone','').strip()
+		address = request.GET.get('address','').strip()
+		pobox = request.GET.get('pobox','').strip()
+		
+		c.execute("INSERT INTO vb_client (name,kt,email,phone,address,postalcode) VALUES (?,?,?,?,?,?)",(ssn,name,email,phone,address,pobox) )
+		conn.commit()
+		conn.close()
+		print ("Inserted into vb_client")
+
+	redirect("/clients")
+	# return template('create.tpl')
+
+@route('/create', method='GET')
 def createpage():
+
 	return template('create.tpl')
 
 @route('/overview')	
@@ -17,14 +40,14 @@ def overviewpage():
 
 	## Database example ##
 	'''
-	conn = sqlite3.connect('todo.db')
+	conn = sqlite3.connect('database.db')
     c = conn.cursor()
-    c.execute("SELECT id, task FROM todo WHERE status LIKE '1';")
+    c.execute("SELECT id, task FROM vb_... WHERE status LIKE '1';")
     result = c.fetchall()
     c.close()
   	'''
 
-  	result='Lalala'
+  	result='Should list all cases in progress or not started'
 	
 	return template('overview.tpl', rows=result)
 
@@ -35,7 +58,6 @@ def clientspage():
 	c.execute("SELECT * from vb_client")
 	result = c.fetchall()
 	c.close()
-
 	return template('clients.tpl', rows=result)
 
 @route('/users')

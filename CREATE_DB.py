@@ -2,11 +2,24 @@ import sqlite3
 con = sqlite3.connect('database.db') # Warning: This file is created in the current directory
 print "Connection successful."
 
-con.execute(''' 
-	CREATE TABLE vb_servicerequest (
-		
-	);
-''')
+# con.execute(''' 
+# 	CREATE TABLE vb_servicerequest (
+		# id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		# serialno VARCHAR(100),
+		# client INT NOT NULL REFERENCES vb_client(id),
+		# status INT NOT NULL REFERENCES vb_status(id),
+		# make INT NOT NULL REFERENCES vb_make(id),
+		# color INT NOT NULL REFERENCES vb_color(id),
+		# problemdesc VARCHAR(1020),
+		# solutiondesc VARCHAR(255),
+		# shortdesc VARCHAR(255),
+		# enteredby INT NOT NULL REFERENCES vb_users(id),
+		# assignedto INT NOT NULL REFERENCES vb_users(id),
+		# received DATE,
+		# started DATE,
+		# finished DATE	
+# 	);
+# ''')
 
 
 
@@ -26,7 +39,6 @@ print "Created table vb_client!"
 #Create two test dummy
 con.execute('''INSERT into vb_client VALUES(1, 'Viktor', '0903843259', 'viktor@rrr.rr', '8659309', 'Bolagata', '900');''')
 con.execute('''INSERT into vb_client VALUES(2, 'Muggi', '654354489', 'mag@bleb.io', '8452652', 'Njoasdf', '255');''')
-
 
 con.commit()
 con.close()
