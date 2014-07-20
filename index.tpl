@@ -2,6 +2,7 @@
 <head>
 	<title>Verk2</title>
 	<link rel="stylesheet" type="text/css" href="static/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="static/my.css">
 	<script type="text/javascript" src="static/jquery.js"></script>
 	<script type="text/javascript" src="static/bootstrap.min.js"></script>
 </head>

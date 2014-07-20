@@ -1,12 +1,28 @@
-%include('index.tpl', title='Pagaaaa')
+%include('index.tpl')
 <h2>Clients</h2>
 
-% setdefault('text', 'Fann ekki text')
-% setdefault('author','fann ekki author')
+<table class="table table-striped table-bordered table-hover table-condensed">
+<thead>
+	<tr>
+		<th>ID</th>
+		<th>Name</th>
+		<th>SSN</th>
+		<th>Email</th>
+		<th>Phone</th>
+		<th>Address</th>
+		<th>Postbox</th>
+	</tr>
+</thead>
+<tbody>
+%for row in rows:
+	<tr>
+	%for col in row:
+		<td>{{col}}</td>
+	%end
+	</tr>
+%end
+</tbody>
+</table> 
 
-<p> {{ get('title', 'No Title') }} </p>
-<p> {{ text }} </p>
 
-% if defined('author'):
-  <p>{{ author }}</p>
-% end
+%include('footer.tpl')

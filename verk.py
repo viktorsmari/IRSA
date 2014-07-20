@@ -1,4 +1,5 @@
 from bottle import route, run, template, get, post, request, static_file
+import sqlite3
 
 
 #### Basic routes ####
@@ -13,11 +14,29 @@ def createpage():
 
 @route('/overview')	
 def overviewpage():
-	return template('overview.tpl')
+
+	## Database example ##
+	'''
+	conn = sqlite3.connect('todo.db')
+    c = conn.cursor()
+    c.execute("SELECT id, task FROM todo WHERE status LIKE '1';")
+    result = c.fetchall()
+    c.close()
+  	'''
+
+  	result='Lalala'
+	
+	return template('overview.tpl', rows=result)
 
 @route('/clients')
 def clientspage():
-	return template('clients.tpl')
+	conn = sqlite3.connect('database.db');
+	c = conn.cursor()
+	c.execute("SELECT * from vb_client")
+	result = c.fetchall()
+	c.close()
+
+	return template('clients.tpl', rows=result)
 
 @route('/users')
 def userspage():
