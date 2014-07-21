@@ -6,7 +6,10 @@ Repair shop system running on Python / Bottle
 
 Ubuntu install:
 
-    git clone https://github.com/viktorsmari/verk2
+Clone https or ssh:
+
+    git clone https://github.com/viktorsmari/IRSA
+    git clone git@github.com:viktorsmari/IRSA.git
  
 You need sqlite3 for the database and python-pip to install bottle
 
