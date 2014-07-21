@@ -5,6 +5,7 @@ import sqlite3
 
 @route('/')
 def index():
+	# This page really does nothing..
 	return template('index.tpl')
 
 @route('/new', method='GET')
@@ -47,15 +48,23 @@ def createpage():
 @route('/overview')	
 def overviewpage():
 
-	## Database example ##
+	# Get top page statistics
 	conn = sqlite3.connect('database.db')
 	c = conn.cursor()
+
+	# Why do I need to assign values to this list beforehand ?!
+	stats = [9,8,7,6]
+	stats[0] = c.execute("select count(*) from vb_servicerequest where status Like 0;").fetchone()[0]
+	stats[1] = c.execute("select count(*) from vb_servicerequest where status Like 1;").fetchone()[0]
+	stats[2] = c.execute("select count(*) from vb_servicerequest where status Like 2;").fetchone()[0]
+	stats[3] = c.execute("select count(*) from vb_servicerequest where status Like 3;").fetchone()[0]
+
 
 	c.execute("SELECT * FROM vb_servicerequest")
 	result = c.fetchall()
 	c.close()
 
-	return template('overview.tpl', rows=result)
+	return template('overview.tpl', rows=result,statusrows=stats)
 
 @route('/clients')
 def clientspage():
@@ -65,6 +74,7 @@ def clientspage():
 	result = c.fetchall()
 	c.close()
 	return template('clients.tpl', rows=result)
+
 
 @route('/users')
 def userspage():
@@ -100,10 +110,6 @@ def callback(name):
 	assert name.isalpha()
 
 
-
-
-
-
 #### Serving CSS and JS files #####
 @route('/static/<filename>')
 def server_staticf(filename):
@@ -114,7 +120,6 @@ from bottle import error
 @error(404)
 def error404(error):
 	return '<p>You gotz 404 error</p> <a href="/">Go Back</a>'
-
 
 # Reloader only in developer mode !
 run(host='localhost', port=8080, debug=True, reloader=True)

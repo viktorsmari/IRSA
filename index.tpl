@@ -14,15 +14,17 @@
 			<div class="col-md-6 col-xs-6">
 				<ul class="list-inline">
 
-					%setdefault('notstarted',29)
-					%setdefault('inprogress',28)
-					%setdefault('waiting',27)
-					%setdefault('ready',26)
+					%if defined('statusrows'):
+				    <li>New:         <strong> {{ statusrows[0] }} </strong></li>
+				    <li>In progress: <strong> {{ statusrows[1] }} </strong></li>
+				    <li>Waiting:     <strong> {{ statusrows[2] }} </strong></li>
+				    <li>Ready:       <strong> {{ statusrows[3] }} </strong></li>
 
-				    <li>New: <strong>{{notstarted}}</strong></li>
-				    <li>In progress: <strong> {{ inprogress }} </strong></li>
-				    <li>Waiting: <strong> {{ waiting }} </strong></li>
-				    <li>Ready: <strong> {{ ready }} </strong></li>
+					%else:
+						<p>Only works in Overview still</p>
+					%end
+
+
 				</ul>
 			</div>
 			<div class="col-md-5 col-xs-5">
