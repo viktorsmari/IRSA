@@ -23,4 +23,6 @@ To create a database with some dummy records, run first:
 Run it from the directory:
 
     python irsa.py
+
+and visit localhost:8080 from browser
    
