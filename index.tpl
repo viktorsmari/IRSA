@@ -50,7 +50,6 @@
 		</div> <!-- End row menu -->
 
 
-		<!--  Should we INJECT stuff here? -->
-		<!-- Instead of importing this file into every other files -->
+		<!--  Should we INJECT stuff here using the base ? -->
 
 	<!-- Rest is in footer.tpl -->

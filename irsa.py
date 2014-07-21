@@ -1,7 +1,6 @@
 from bottle import route, run, template, get, post, request, static_file, redirect
 import sqlite3
 
-
 #### Basic routes ####
 
 @route('/')
@@ -15,17 +14,27 @@ def create_new():
 		c = conn.cursor()
 
 		# This needs refactoring, SQL inject safe?
+
 		ssn = request.GET.get('ssn','').strip()
 		name = request.GET.get('name','').strip()
 		email = request.GET.get('email','').strip()
 		phone = request.GET.get('phone','').strip()
 		address = request.GET.get('address','').strip()
 		pobox = request.GET.get('pobox','').strip()
-		
 		c.execute("INSERT INTO vb_client (name,kt,email,phone,address,postalcode) VALUES (?,?,?,?,?,?)",(ssn,name,email,phone,address,pobox) )
+
+		# Service RQ table
+		readydate = request.GET.get('readydate','').strip()
+		serialnumber = request.GET.get('serialnumber','').strip()
+		make = request.GET.get('make','').strip()
+		shortdesc = request.GET.get('shortdesc','').strip()
+		color = request.GET.get('color','').strip()		
+		problemdesc = request.GET.get('problemdesc','').strip()		
+		c.execute("INSERT INTO vb_servicerequest (finished,serialno,make,shortdesc,color,problemdesc) VALUES (?,?,?,?,?,?)", (readydate,serialnumber,make,shortdesc,color,problemdesc) )
+
 		conn.commit()
 		conn.close()
-		print ("Inserted into vb_client")
+		print ("Inserted into vb_client...")
 
 	redirect("/clients")
 	# return template('create.tpl')
@@ -39,16 +48,13 @@ def createpage():
 def overviewpage():
 
 	## Database example ##
-	'''
 	conn = sqlite3.connect('database.db')
-    c = conn.cursor()
-    c.execute("SELECT id, task FROM vb_... WHERE status LIKE '1';")
-    result = c.fetchall()
-    c.close()
-  	'''
+	c = conn.cursor()
 
-  	result='Should list all cases in progress or not started'
-	
+	c.execute("SELECT * FROM vb_servicerequest")
+	result = c.fetchall()
+	c.close()
+
 	return template('overview.tpl', rows=result)
 
 @route('/clients')

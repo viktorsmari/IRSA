@@ -20,6 +20,7 @@
 		<td>{{col}}</td>
 	%end
 	</tr>
+
 %end
 </tbody>
 </table> 

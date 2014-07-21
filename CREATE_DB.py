@@ -2,26 +2,30 @@ import sqlite3
 con = sqlite3.connect('database.db') # Warning: This file is created in the current directory
 print "Connection successful."
 
-# con.execute(''' 
-# 	CREATE TABLE vb_servicerequest (
-		# id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-		# serialno VARCHAR(100),
-		# client INT NOT NULL REFERENCES vb_client(id),
-		# status INT NOT NULL REFERENCES vb_status(id),
-		# make INT NOT NULL REFERENCES vb_make(id),
-		# color INT NOT NULL REFERENCES vb_color(id),
-		# problemdesc TEXT,
-		# solutiondesc TEXT,
-		# shortdesc VARCHAR(255),
-		# enteredby INT NOT NULL REFERENCES vb_users(id),
-		# assignedto INT NOT NULL REFERENCES vb_users(id),
-		# received DATE,
-		# started DATE,
-		# finished DATE	
-# 	);
-# ''')
-
-
+## Table is missing all foreign keys
+## just a test table
+con.execute(''' 
+	CREATE TABLE vb_servicerequest (
+		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		serialno VARCHAR(100),
+		client INT ,
+		status INT ,
+		make INT ,
+		color INT,
+		problemdesc TEXT,
+		solutiondesc TEXT,
+		shortdesc VARCHAR(255),
+		enteredby INT ,
+		assignedto INT,
+		received DATE,
+		started DATE,
+		finished DATE	
+	);
+''')
+print "Created vb_servicerequest!"
+con.execute(''' INSERT into vb_servicerequest VALUES 
+		(1,'S1231', 1,2,3,4,'Broken dong','replaced it', 'short desc',1,1,'2012-11-11','2011-10-10','2010-08-07')
+	''')
 
 con.execute('''
 	CREATE TABLE vb_client (
