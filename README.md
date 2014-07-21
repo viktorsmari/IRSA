@@ -1,7 +1,7 @@
-verk2
+IRSA
 =====
 
-Repair shop system running on Python / Bottle
+Repair Shop Assistant running on Python / Bottle
 
 
 Ubuntu install:
@@ -19,5 +19,5 @@ You need sqlite3 for the database and python-pip to install bottle
 
 Run it from the directory:
 
-    python verk.py
+    python IRSA.py
    
